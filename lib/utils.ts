@@ -27,7 +27,7 @@ export const NavbarItems: NavbarItem[] = [
   { title: "Exercises", url: "#", icon: Dumbbell },
   { title: "Notes", url: "#", icon: NotebookPen },
   { title: "Calendar", url: "#", icon: Calendar },
-  { title: "Search", url: "#", icon: Search },
+  // { title: "Search", url: "#", icon: Search },
   { title: "History", url: "#", icon: History },
   { title: "Settings", url: "#", icon: Settings },
 ];
