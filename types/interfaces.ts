@@ -6,3 +6,9 @@ export interface User {
   isLoggedIn?: boolean;
   userEntered?: boolean;
 }
+
+export interface NavbarItem {
+  title: string;
+  url: string;
+  icon: React.ElementType;
+}

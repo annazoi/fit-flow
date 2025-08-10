@@ -10,8 +10,6 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-// interface
-
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIRABASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIRABASE_AUTH_DOMAIN,

@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { NavbarItems } from "@/lib/utils";
+import { NavbarItems } from "@/lib/variables";
 
 export function AppSidebar() {
   return (
