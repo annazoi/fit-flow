@@ -31,3 +31,17 @@ export const NavbarItems: NavbarItem[] = [
   { title: "History", url: "#", icon: History },
   { title: "Settings", url: "#", icon: Settings },
 ];
+
+// links
+export const paths = {
+  home: "/",
+  auth: {
+    signIn: "/auth/sign-in",
+    signUp: "/auth/sign-up",
+  },
+  exercises: "/exercises",
+  notes: "/notes",
+  calendar: "/calendar",
+  history: "/history",
+  settings: "/settings",
+};
