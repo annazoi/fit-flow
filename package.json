@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/core": "^7.4.2",
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
@@ -29,11 +31,13 @@
     "react-hook-form": "^7.62.0",
     "recharts": "^3.1.2",
     "tailwind-merge": "^3.3.1",
+    "uuid": "^11.1.0",
     "vaul": "^1.1.2",
     "yup": "^1.7.0",
     "zustand": "^5.0.7"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.4.2",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^6.0.0",

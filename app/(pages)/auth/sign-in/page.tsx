@@ -17,9 +17,15 @@ import { paths } from "@/lib/variables";
 import { signinSchema } from "@/schemas/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { authStore } from "@/store/authstore";
 
+interface User {
+  email: string;
+  password: string;
+}
 export default function SignIn() {
   const router = useRouter();
+  const { userId, email, logIn } = authStore((store) => store);
   const {
     register,
     handleSubmit,
@@ -32,9 +38,12 @@ export default function SignIn() {
     resolver: yupResolver(signinSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: User) => {
     try {
       console.log(data);
+      console.log("Sign In successful");
+      console.log("userId:", userId);
+      console.log("email:", email);
     } catch (error) {
       console.error("Sign In failed:", error);
     }

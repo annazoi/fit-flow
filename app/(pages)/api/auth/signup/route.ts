@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     );
 
     return Response.json(result.rows[0]); // Return the created user (without password)
-  } catch (err: any) {
-    return Response.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    return Response.json({ error: (err as Error).message }, { status: 500 });
   }
 }

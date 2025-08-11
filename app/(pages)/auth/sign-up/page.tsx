@@ -20,6 +20,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createUser } from "@/app/services/auth";
 
+interface User {
+  email: string;
+  password: string;
+}
+
 export default function SignIn() {
   const router = useRouter();
   const {
@@ -34,7 +39,7 @@ export default function SignIn() {
     resolver: yupResolver(signupSchema),
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: User) => {
     try {
       await createUser(data);
       router.push(paths.auth.signIn);
@@ -81,7 +86,7 @@ export default function SignIn() {
                     variant="link"
                     className="ml-2 text-sm underline-offset-4 hover:underline"
                     onClick={() => {
-                      const password = generatePassword();
+                      // const password = generatePassword();
                       // Do something with the generated password, e.g., fill the input
                     }}
                   >
