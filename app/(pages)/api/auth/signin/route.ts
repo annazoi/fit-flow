@@ -9,7 +9,6 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
-    const id = uuidv4();
 
     if (!email || !password) {
       return Response.json(
@@ -18,27 +17,21 @@ export async function POST(request: Request) {
       );
     }
 
-    if (email) {
-      const existingUser = await prisma.user.findUnique({
-        where: { email },
-      });
-      if (existingUser) {
-        return Response.json(
-          { error: "Email already in use." },
-          { status: 409 }
-        );
-      }
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      return Response.json(
+        { error: "Invalid email or password." },
+        { status: 401 }
+      );
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await prisma.user.create({
-      data: {
-        uuid: id,
-        email,
-        password: hashedPassword,
-      },
-    });
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return Response.json({ error: "Invalid password." }, { status: 401 });
+    }
 
     const token = await new jose.SignJWT({ userId: user.uuid })
       .setProtectedHeader({ alg: "HS256" })
@@ -47,14 +40,14 @@ export async function POST(request: Request) {
 
     return Response.json(
       {
-        message: "User created successfully.",
+        message: "User signed in successfully.",
         user: {
           id: user.uuid,
           email: user.email,
         },
         token,
       },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (err: unknown) {
     return Response.json({ error: (err as Error).message }, { status: 500 });

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { paths } from "@/lib/variables";
 import { GoalDrawer } from "@/components/goal-drawer";
 import { getImageProps } from "next/image";
+import { authStore } from "@/store/authstore";
 
 export default function HomePage() {
   const router = useRouter();

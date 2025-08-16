@@ -1,15 +1,13 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { decodeToken } from "@/utils/token";
 
 interface AuthState {
   isLoggedIn: boolean;
   token: string;
   email: string;
-  // username: string;
-  // fullName: string;
-  // avatar: string;
-  userId: string;
   exp: number;
+  userId: string;
   logOut: () => void;
   logIn: (payload: any) => void;
 }
@@ -18,9 +16,6 @@ const initialStateValues = {
   isLoggedIn: false,
   token: "",
   email: "",
-  // username: "",
-  // fullName: "",
-  // avatar: "",
   userId: "",
   exp: 0,
 };

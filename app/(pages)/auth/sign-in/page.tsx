@@ -18,14 +18,24 @@ import { signinSchema } from "@/schemas/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authStore } from "@/store/authstore";
+import { useMutation } from "@tanstack/react-query";
+import { signInUser } from "@/app/services/auth";
 
-interface User {
-  email: string;
-  password: string;
-}
 export default function SignIn() {
   const router = useRouter();
-  const { userId, email, logIn } = authStore((store) => store);
+  const { logIn } = authStore((store) => store);
+  const signInMutation = useMutation({
+    mutationFn: signInUser,
+    onSuccess: (data) => {
+      console.log("data:", data);
+      logIn({
+        email: data.user.email,
+        token: data.token,
+        userId: data.user.id,
+      });
+    },
+  });
+
   const {
     register,
     handleSubmit,
@@ -38,12 +48,9 @@ export default function SignIn() {
     resolver: yupResolver(signinSchema),
   });
 
-  const onSubmit = async (data: User) => {
+  const onSubmit = async (data: any) => {
     try {
-      console.log(data);
-      console.log("Sign In successful");
-      console.log("userId:", userId);
-      console.log("email:", email);
+      signInMutation.mutate(data);
     } catch (error) {
       console.error("Sign In failed:", error);
     }
