@@ -16,7 +16,6 @@ model User {
   password  String
   uuid String @unique @default(uuid())
   exercises Exercise[] 
-  // calories String? @default("")
   created_at            DateTime     @default(now())
   updated_at            DateTime     @updatedAt
   @@index([uuid])
@@ -27,17 +26,15 @@ model Exercise {
   id      Int    @id @default(autoincrement())
   userId  Int
   user    User   @relation(fields: [userId], references: [id])
-  // type    String? @default("")
   type    ExerciseType 
   @@map("exercises")
 }
 
-model Category {
-  id          Int      @id @default(autoincrement())
-  name        String
-  // exercises   Exercise[]
-  @@map("categories")
-}
+// model Category {
+//   id          Int      @id @default(autoincrement())
+//   name        String
+//   @@map("categories")
+// }
 
 enum ExerciseType {
   CHEST
